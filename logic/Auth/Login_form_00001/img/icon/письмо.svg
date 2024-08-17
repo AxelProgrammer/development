@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+ <svg class="img-icon" xmlns="http://www.w3.org/2000/svg" version="1.0" width="60.0pt" height="60.0pt" viewBox="0 0 60.0 60.0"  preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.0,60.0) scale(0.1,-0.1)"
+                         stroke="none">
+                        <path d="M170 370 c63 -60 122 -109 130 -110 8 0 67 50 130 110 l115 109 -245
+                            0 -245 0 115 -109z" />
+                        <path d="M20 287 l0 -167 280 0 280 0 0 167 0 167 -48 -45 c-178 -169 -202
+                            -189 -232 -189 -30 0 -39 7 -237 194 l-43 40 0 -167z" />
+                    </g>
+                </svg>

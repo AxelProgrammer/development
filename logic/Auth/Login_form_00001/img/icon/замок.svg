@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="60.0pt" height="60.0pt" viewBox="0 0 60.0 60.0"  preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.0,60.0) scale(0.1,-0.1)"
+                         stroke="none">
+                        <path id="login_password_path" d="M232 540 c-42 -26 -72 -76 -72 -122 0 -35 -2 -38 -28 -38 -15 0 -33
+                            -5 -40 -12 -17 -17 -17 -279 0 -296 17 -17 399 -17 416 0 17 17 17 279 0 296
+                            -7 7 -24 12 -39 12 -24 0 -27 4 -32 46 -6 55 -31 93 -78 116 -45 23 -86 23
+                            -127 -2z m117 -34 c31 -17 51 -54 51 -96 l0 -30 -100 0 -100 0 0 33 c1 83 76
+                            130 149 93z" />
+                    </g>
+                </svg>
