@@ -79,8 +79,6 @@
 
     <script>
         const wrapper = document.querySelector('.wrapper');
-        const login = document.querySelector('.login');
-        const register = document.querySelector('.register');
         const loginLink = document.querySelector('.login-link');
         const RegisterLink = document.querySelector('.register-link');
 
