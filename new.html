@@ -32,11 +32,8 @@
             const initialPath = '';  // Начальный путь (пустая строка для корневой директории)
 
             try {
-                // Получаем список файлов и директорий в корневой директории
-                const files = await getFilesInDirectory(repoOwner, repoName, initialPath);
-
-                // Отфильтруйте файлы Markdown
-                const markdownFiles = files.filter(file => file.name.endsWith('.md'));
+                // Получаем все Markdown файлы
+                const markdownFiles = await getAllMarkdownFiles(repoOwner, repoName, initialPath);
 
                 if (markdownFiles.length === 0) {
                     fileListContainer.innerHTML = 'Markdown файлы не найдены';
@@ -46,7 +43,7 @@
                 // Постройте список файлов
                 const fileListHtml = markdownFiles.map(file => `
                     <li>
-                        <a href="#" data-url="${file.download_url}">${file.name}</a>
+                        <a href="#" data-url="${file.download_url}">${file.path}</a>
                     </li>
                 `).join('');
                 fileListContainer.innerHTML = fileListHtml;
@@ -73,6 +70,27 @@
                 console.error('Ошибка при загрузке файлов:', error);
             }
         });
+
+        // Рекурсивный обход всех директорий
+        async function getAllMarkdownFiles(repoOwner, repoName, path) {
+            const files = [];
+            const stack = [path];  // Стек директорий для обработки
+
+            while (stack.length > 0) {
+                const currentPath = stack.pop();
+                const content = await getFilesInDirectory(repoOwner, repoName, currentPath);
+
+                for (const item of content) {
+                    if (item.type === 'file' && item.name.endsWith('.md')) {
+                        files.push(item);
+                    } else if (item.type === 'dir') {
+                        stack.push(item.path);  // Добавляем поддиректории в стек
+                    }
+                }
+            }
+
+            return files;
+        }
 
         // Функция для получения содержимого директории
         async function getFilesInDirectory(repoOwner, repoName, path) {
