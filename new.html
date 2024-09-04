@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Files List</title>
+    <title>Files List</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        #file-list {
+        #file-list, #image-list {
             padding: 20px;
             max-width: 800px;
             margin: auto;
             list-style-type: none;
         }
-        #file-list li {
+        #file-list li, #image-list li {
             margin-bottom: 10px;
+        }
+        #image-list img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <h1>Markdown Files List</h1>
+    <h1>Files List</h1>
+    <h2>Markdown Files</h2>
     <ul id="file-list">Загрузка...</ul>
+    <h2>Screenshots</h2>
+    <ul id="image-list">Загрузка...</ul>
     <div id="markdown-content"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const fileListContainer = document.getElementById('file-list');
+            const imageListContainer = document.getElementById('image-list');
             const markdownContainer = document.getElementById('markdown-content');
             
             const repoOwner = 'AxelProgrammer';
@@ -32,23 +40,35 @@
             const initialPath = '';  // Начальный путь (пустая строка для корневой директории)
 
             try {
-                // Получаем все Markdown файлы
-                const markdownFiles = await getAllMarkdownFiles(repoOwner, repoName, initialPath);
+                // Получаем все Markdown файлы и изображения
+                const [markdownFiles, imageFiles] = await Promise.all([
+                    getAllMarkdownFiles(repoOwner, repoName, initialPath),
+                    getAllImages(repoOwner, repoName, initialPath)
+                ]);
 
                 if (markdownFiles.length === 0) {
                     fileListContainer.innerHTML = 'Markdown файлы не найдены';
-                    return;
+                } else {
+                    const fileListHtml = markdownFiles.map(file => `
+                        <li>
+                            <a href="#" data-url="${file.download_url}">${file.path}</a>
+                        </li>
+                    `).join('');
+                    fileListContainer.innerHTML = fileListHtml;
                 }
 
-                // Постройте список файлов
-                const fileListHtml = markdownFiles.map(file => `
-                    <li>
-                        <a href="#" data-url="${file.download_url}">${file.path}</a>
-                    </li>
-                `).join('');
-                fileListContainer.innerHTML = fileListHtml;
+                if (imageFiles.length === 0) {
+                    imageListContainer.innerHTML = 'Изображения не найдены';
+                } else {
+                    const imageListHtml = imageFiles.map(file => `
+                        <li>
+                            <img src="${file.download_url}" alt="${file.name}">
+                        </li>
+                    `).join('');
+                    imageListContainer.innerHTML = imageListHtml;
+                }
 
-                // Обработчик кликов на ссылки
+                // Обработчик кликов на ссылки Markdown файлов
                 fileListContainer.addEventListener('click', async (event) => {
                     if (event.target.tagName === 'A') {
                         event.preventDefault();
@@ -67,11 +87,12 @@
                 });
             } catch (error) {
                 fileListContainer.innerHTML = 'Ошибка при загрузке файлов: ' + error.message;
+                imageListContainer.innerHTML = 'Ошибка при загрузке изображений: ' + error.message;
                 console.error('Ошибка при загрузке файлов:', error);
             }
         });
 
-        // Рекурсивный обход всех директорий
+        // Рекурсивный обход всех директорий для Markdown файлов
         async function getAllMarkdownFiles(repoOwner, repoName, path) {
             const files = [];
             const stack = [path];  // Стек директорий для обработки
@@ -82,6 +103,27 @@
 
                 for (const item of content) {
                     if (item.type === 'file' && item.name.endsWith('.md')) {
+                        files.push(item);
+                    } else if (item.type === 'dir') {
+                        stack.push(item.path);  // Добавляем поддиректории в стек
+                    }
+                }
+            }
+
+            return files;
+        }
+
+        // Рекурсивный обход всех директорий для изображений
+        async function getAllImages(repoOwner, repoName, path) {
+            const files = [];
+            const stack = [path];  // Стек директорий для обработки
+
+            while (stack.length > 0) {
+                const currentPath = stack.pop();
+                const content = await getFilesInDirectory(repoOwner, repoName, currentPath);
+
+                for (const item of content) {
+                    if (item.type === 'file' && item.name === 'screenshot.jpg') {
                         files.push(item);
                     } else if (item.type === 'dir') {
                         stack.push(item.path);  // Добавляем поддиректории в стек

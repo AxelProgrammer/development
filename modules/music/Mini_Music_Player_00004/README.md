@@ -12,5 +12,3 @@ Here's what you'll learn:
 
 # Screenshot
 Here we have project screenshot :
-
-![screenshot-1](screenshot.jpg)
