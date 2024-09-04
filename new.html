@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Files List</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        #file-list {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            list-style-type: none;
+        }
+        #file-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown Files List</h1>
+    <ul id="file-list">Загрузка...</ul>
+    <div id="markdown-content"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const fileListContainer = document.getElementById('file-list');
+            const markdownContainer = document.getElementById('markdown-content');
+            
+            const repoOwner = 'AxelProgrammer';
+            const repoName = 'development';
+            const initialPath = '';  // Начальный путь (пустая строка для корневой директории)
+
+            try {
+                // Получаем список файлов и директорий в корневой директории
+                const files = await getFilesInDirectory(repoOwner, repoName, initialPath);
+
+                // Отфильтруйте файлы Markdown
+                const markdownFiles = files.filter(file => file.name.endsWith('.md'));
+
+                if (markdownFiles.length === 0) {
+                    fileListContainer.innerHTML = 'Markdown файлы не найдены';
+                    return;
+                }
+
+                // Постройте список файлов
+                const fileListHtml = markdownFiles.map(file => `
+                    <li>
+                        <a href="#" data-url="${file.download_url}">${file.name}</a>
+                    </li>
+                `).join('');
+                fileListContainer.innerHTML = fileListHtml;
+
+                // Обработчик кликов на ссылки
+                fileListContainer.addEventListener('click', async (event) => {
+                    if (event.target.tagName === 'A') {
+                        event.preventDefault();
+                        const markdownUrl = event.target.getAttribute('data-url');
+                        const response = await fetch(markdownUrl);
+
+                        if (!response.ok) {
+                            markdownContainer.innerHTML = 'Ошибка при загрузке файла: ' + response.statusText;
+                            return;
+                        }
+
+                        const markdown = await response.text();
+                        const htmlContent = marked.parse(markdown);
+                        markdownContainer.innerHTML = htmlContent;
+                    }
+                });
+            } catch (error) {
+                fileListContainer.innerHTML = 'Ошибка при загрузке файлов: ' + error.message;
+                console.error('Ошибка при загрузке файлов:', error);
+            }
+        });
+
+        // Функция для получения содержимого директории
+        async function getFilesInDirectory(repoOwner, repoName, path) {
+            const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error('Ошибка сети: ' + response.statusText);
+            }
+            
+            return response.json();
+        }
+    </script>
+</body>
+</html>
