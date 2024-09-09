@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- ===== CSS Files ===== -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/scins/color-1.css">
+    <link rel="stylesheet" href="./css/portfolio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    
+    <link rel="stylesheet" href="css/scins/color-1.css" class="alternate-style" title="color-1">
+    <link rel="stylesheet" href="css/scins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="css/scins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="css/scins/color-4.css" class="alternate-style" title="color-4" disabled>
+    <link rel="stylesheet" href="css/scins/color-5.css" class="alternate-style" title="color-5" disabled>
+    <link rel="stylesheet" href="./css/switcher/style-switcher.css">
 </head>
-<!-- time 1.57.00 https://www.youtube.com/watch?v=zJE-ze4TfXc&list=PLrKudo5h_b8CKGtcPWIYtWmbTokv8QhlY -->
 
 <body>
     <div class="main_container">
@@ -26,15 +29,15 @@
                 <span></span>
             </div>
             <ul class="nav">
-                <li><a href="#" class="active"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-user"></i> About</a></li>
-                <li><a href="#"><i class="fa fa-list"></i> services</a></li>
-                <li><a href="#"><i class="fa fa-briefcase"></i> Portfolio</a></li>
-                <li><a href="#"><i class="fa fa-comments"></i> Contact</a></li>
+                <li><a href="#home" class="nav-li active"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#about" class="nav-li"><i class="fa fa-user"></i> About</a></li>
+                <li><a href="#service" class="nav-li"><i class="fa fa-list"></i> Services</a></li>
+                <li><a href="#portfolio" class="nav-li"><i class="fa fa-briefcase"></i> Portfolio</a></li>
+                <li><a href="#contact" class="nav-li"><i class="fa fa-comments"></i> Contact</a></li>
             </ul>
         </div>
         <div class="main_contant">
-            <section class="home section hidden">
+            <section class="home section" id="home">
                 <div class="container">
                     <div class="row">
                         <div class="home-info">
@@ -51,7 +54,7 @@
                     </div>
                 </div>
             </section>
-            <section class="about section hidden">
+            <section class="about section" id="about">
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
@@ -107,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="buttons padd-15S">
+                                        <div class="buttons padd-15">
                                             <a href="#" class="btn">Download CV</a>
                                             <a href="#contact" class="btn hire-me">Hire Me</a>
                                         </div>
@@ -236,7 +239,7 @@
                     </div>
                 </div>
             </section>
-            <section class="service section hidden">
+            <section class="service section" id="service">
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
@@ -301,7 +304,7 @@
                     </div>
                 </div>
             </section>
-            <section class="portfolio section hidden">
+            <section class="portfolio section" id="portfolio">
                 <div class="containre">
                     <div class="row">
                         <div class="section-title padd-15">
@@ -359,21 +362,99 @@
                     </div>
                 </div>
             </section>
-            <section class="contact section">
+            <section class="contact section" id="contact">
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
                             <h2>Contact Me</h2>
                         </div>
                     </div>
-                    <h3 class="contact-title">Have You Any Questions ?</h3>
-                    <h4 class="contact-sub-title">I'm AT YOUR SERVICES</h4>
+                    <h3 class="contact-title padd-15">Have You Any Questions ?</h3>
+                    <h4 class="contact-sub-title padd-15">I'm AT YOUR SERVICES</h4>
+                    <div class="row">
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <h4>Call Us On</h4>
+                            <p>+92 3330545218</p>
+                        </div>
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                            <h4>Office</h4>
+                            <p>Islamahad</p>
+                        </div>
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <h4>Email</h4>
+                            <p>axel.work.company@gmail.com</p>
+                        </div>
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-globe-europe"></i></div>
+                            <h4>Website</h4>
+                            <p>www.domain.com</p>
+                        </div>
+                    </div>
+                    <h3 class="contact-title padd-15">SEND ME AN EMAIL</h3>
+                    <h4 class="contact-sub-title padd-15">I'M VARY RESPOSIVE TO MESSAGES</h4>
+                    <div class="row">
+                        <div class="contact-form padd-15">
+                            <div class="row">
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Subject">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <div class="form-group">
+                                        <textarea name="" class="form-control" id="" placeholder="Massage"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <button type="submit" class="btn">Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
     </div>
 
+    <div class="style-switcher">
+        <div class="style-switcher-toggler s-icon">
+            <i class="fas fa-cog fa-scin"></i>
+        </div>
+        <div class="day-night s-icon">
+            <i class="fas"></i>
+        </div>
+        <h4>Theme Colors</h4>
+        <div class="colors">
+            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/style-switcher.js"></script>
 </body>
 
 </html>
