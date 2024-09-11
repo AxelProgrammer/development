@@ -132,7 +132,7 @@ b {
 
 aside {
     width: 10%;
-    height: 100vh;
+    height: 900px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -153,8 +153,15 @@ aside .top {
 }
 
 .logo img {
-    width: 2rem;
-    height: 2rem;
+    margin: auto 0;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.logo h2, .logo h2 .danger{
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 aside .close {
@@ -604,7 +611,7 @@ main .recent-orders a {
         z-index: 3;
         height: 100vh;
         padding-right: var(--card-padding);
-        display: none;
+        /* display: none; */
     }
 
     aside .logo {
@@ -672,16 +679,13 @@ main .recent-orders a {
     .right .top button span {
         font-size: 2rem;
     }
+
+    
 }
 
 @media screen and (max-width: 789px) {
     .container {
         width: 100%;
-    }
-
-    main .close {
-        display: inline-block;
-        cursor: pointer;
     }
 
     main {
